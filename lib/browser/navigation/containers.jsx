@@ -55,6 +55,13 @@ class Navigation extends React.Component {
   }
 
   getItems () {
+    // 將自動彙整的 posts 加入 navigation
+    this.props.data.navigation.main.push({
+      text: '題庫',
+      type: 'label',
+      children: this.props.data.posts,
+    });
+
     const {page} = this.props;
     const {navigation} = Object.assign({}, { navigation: {} }, this.props.data);
     const items = navigation.main || [];

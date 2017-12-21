@@ -34,6 +34,28 @@ module.exports = ({hexo}) => {
 
     const config = filter(locals.config, allowedProperties.config);
 
+    // 準備彙整所有 posts
+    let posts = [];
+
+    // 依照 navigation data 格式彙整
+    for (let post of locals.site.posts.data) {
+      posts.push({
+        text: post.title,
+        type: 'link',
+        path: post.path,
+        date: post.date.format(),
+      })
+    }
+
+    // 依建立時間排序
+    posts = posts.sort((a, b) => {
+      // 舊的在前
+      return new Date(a.date) - new Date(b.date);
+    });
+
+    // 放置於 data 中待整合現有 navigation data
+    data.posts = posts;
+
     locals.initial_state = {
       page,
       data,
