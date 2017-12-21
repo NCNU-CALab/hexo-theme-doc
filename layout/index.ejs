@@ -1,0 +1,24 @@
+<div class="doc-content">
+  <div class="dc-page">
+    <div class="dc-card">
+      <div id="react-search-results-root"></div>
+      <div id="page-content" class="doc-formatting">
+      <%
+        if (is_category()) {
+          title = `題目來源： ${page.category}`;
+        } else if (is_tag()) {
+          title = `#${page.tag}`;
+        }
+      %>
+      <h1><%- title %></h1>
+
+        <ul>
+          <% for (let post of page.posts.data) { %>
+            <li><a href="<%- url_for(post.path) %>"><%- post.title %></a></li>
+          <% } %>
+        </ul>
+        <div id="react-support-footer-root"></div>
+      </div>
+    </div>
+  </div>
+</div>
